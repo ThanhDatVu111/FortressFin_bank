@@ -51,36 +51,46 @@ public class Deposit extends JFrame implements ActionListener
 
         setLayout(null);
         setSize(850,800);
-        setLocation(360,20);
+        centerWindowOnScreen();
         setUndecorated(true);
         setVisible(true);
 
     }
 
+    public void centerWindowOnScreen()
+    {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - getWidth()) / 2;
+        int y = (screenSize.height - getHeight()) / 2;
+        setLocation(x, y);
+    }
+
     public void actionPerformed(ActionEvent e)
     {
-        try
+        if (e.getSource() == deposit_button)
         {
-            String amount = deposit_field.getText();
-            Date date = new Date();
-            if (e.getSource() == deposit_button)
+            try
             {
+                String amount = deposit_field.getText();
+                Date date = new Date();
                 if (deposit_field.getText().isEmpty() || !amount.matches("\\d+")) // Check if the input is not empty and contains only numbers
                     JOptionPane.showMessageDialog(null,"Please enter the valid amount to deposit");
                 else
                 {
-                    Custom_connection c = new Custom_connection();;
+                    Custom_connection c = new Custom_connection();
                     c.j_statement.executeUpdate("insert into bank values('"+PIN+"', '"+date+"','Deposit', '"+amount+"')");
                     JOptionPane.showMessageDialog(null,"Successfully deposited "+amount+"$");
                     deposit_field.setText("");
                 }
-            }else if (e.getSource() == back_button)
-            {
-                new Main(PIN);
-                setVisible(false);
             }
-        }catch (Exception E){
-            E.printStackTrace();
+            catch (Exception E){
+                E.printStackTrace();
+            }
+        }
+        else if (e.getSource() == back_button)
+        {
+            new Main(PIN);
+            setVisible(false);
         }
     }
     public static void main(String[] args)

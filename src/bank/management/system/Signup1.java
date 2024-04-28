@@ -58,7 +58,7 @@ public class Signup1 extends JFrame implements ActionListener
         text_hero.setOpaque(false); // Make the text field transparent
         add(text_hero);
 
-        JLabel DOB = new JLabel("Date of Birth:");
+        JLabel DOB = new JLabel("DOB:");
         DOB.setFont(new Font("Rale way", Font.BOLD, 20));
         DOB.setBounds(50,250,200,30);
         add(DOB);
@@ -82,13 +82,13 @@ public class Signup1 extends JFrame implements ActionListener
         g2 = new JRadioButton("Female");
         g2.setFont(new Font("Rale way", Font.BOLD,14));
         g2.setOpaque(false);
-        g2.setBounds(290,300,80,30);
+        g2.setBounds(290,300,100,30);
         add(g2);
 
         g3 = new JRadioButton("Others");
         g3.setFont(new Font("Rale way", Font.BOLD,14));
         g3.setOpaque(false);
-        g3.setBounds(400,300,80,30);
+        g3.setBounds(400,300,100,30);
         add(g3);
 
         JLabel labelEmail = new JLabel("Email:");
@@ -102,7 +102,7 @@ public class Signup1 extends JFrame implements ActionListener
         text_email.setOpaque(false);
         add(text_email);
 
-        JLabel marry_status = new JLabel("Marital Status:");
+        JLabel marry_status = new JLabel("Marry Status:");
         marry_status.setFont(new Font("Rale way", Font.BOLD, 20));
         marry_status.setBounds(50,400,200,30);
         add(marry_status);
@@ -114,7 +114,7 @@ public class Signup1 extends JFrame implements ActionListener
         add(m1);
 
         m2 = new JRadioButton("Unmarried");
-        m2.setBounds(290,400,100,30);
+        m2.setBounds(290,400,110,30);
         m2.setOpaque(false);
         m2.setFont(new Font("Rale way", Font.BOLD,14));
         add(m2);
@@ -181,17 +181,25 @@ public class Signup1 extends JFrame implements ActionListener
         add(next_button);
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/signup1_bg.png"));
-        Image i2 = i1.getImage().getScaledInstance(850,780,Image.SCALE_DEFAULT);
+        Image i2 = i1.getImage().getScaledInstance(850,800,Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel bg_image = new JLabel(i3);
-        bg_image.setBounds(0,0,850,780);
+        bg_image.setBounds(0,0,850,800);
         add(bg_image);
 
         setLayout(null);
         setSize(850,800);
-        setLocation(360,20);
+        centerWindowOnScreen();
         setUndecorated(true);
         setVisible(true);
+    }
+
+    public void centerWindowOnScreen()
+    {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - getWidth()) / 2;
+        int y = (screenSize.height - getHeight()) / 2;
+        setLocation(x, y);
     }
 
     public void actionPerformed(ActionEvent e) //actionPerformed method from the ActionListener, get called when users hit next button

@@ -19,7 +19,7 @@ public class Balance extends JFrame implements ActionListener
         balance_msg = new JLabel("Your Current Balance is $");
         balance_msg.setForeground(Color.BLACK);
         balance_msg.setFont(new Font("System", Font.BOLD, 24));
-        balance_msg.setBounds(100,150,300,35);
+        balance_msg.setBounds(100,150,330,35);
         add(balance_msg);
 
         back_button = new JButton("BACK");
@@ -40,7 +40,7 @@ public class Balance extends JFrame implements ActionListener
             while (resultSet.next()) //Begins a loop that iterates over the result set if the resultSet.next() return true
             {
                 //add into balance variable so we know the current balance of the account.
-                if (resultSet.getString("type").equals("Deposit"))
+                if (resultSet.getString("type").equals("Deposit") || resultSet.getString("type").equals("Received"))
                     balance += Integer.parseInt(resultSet.getString("amount"));
                 else
                     balance -= Integer.parseInt(resultSet.getString("amount"));
@@ -54,7 +54,7 @@ public class Balance extends JFrame implements ActionListener
         balance_result = new JLabel();
         balance_result.setForeground(Color.BLACK);
         balance_result.setFont(new Font("System", Font.BOLD, 24));
-        balance_result.setBounds(400,150,400,35);
+        balance_result.setBounds(420,150,400,35);
         balance_result.setText(""+balance);
         add(balance_result);
 
@@ -68,9 +68,17 @@ public class Balance extends JFrame implements ActionListener
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
         setSize(850,800);
-        setLocation(360,20);
+        centerWindowOnScreen();
         setUndecorated(true);
         setVisible(true);
+    }
+
+    public void centerWindowOnScreen()
+    {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - getWidth()) / 2;
+        int y = (screenSize.height - getHeight()) / 2;
+        setLocation(x, y);
     }
 
     public void actionPerformed(ActionEvent e)

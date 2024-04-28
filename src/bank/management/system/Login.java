@@ -13,14 +13,13 @@ public class Login extends JFrame implements ActionListener //Login class inheri
     JLabel card_no_msg, pin_msg;
     JTextField card_field;
     JPasswordField pin_field;
-    JButton sign_in_button, clear_button, sign_up_button;
+    JButton sign_in_button, clear_button, sign_up_button, exit_button;
     Login()
     {
         ///calling the constructor to set up JFrame default function of the superclass (JFrame) with the specified title
         super();
-
-        card_no_msg = new JLabel("Card No:");
-        card_no_msg.setFont(new Font("Ralway", Font.BOLD, 28));
+        card_no_msg = new JLabel("Card:");
+        card_no_msg.setFont(new Font("Ral way", Font.BOLD, 28));
         card_no_msg.setForeground(Color.WHITE);
         card_no_msg.setBounds(200,100,375,30);
         add(card_no_msg);
@@ -30,12 +29,12 @@ public class Login extends JFrame implements ActionListener //Login class inheri
         card_field.setBounds(325,100,230,30);
         card_field.setOpaque(false); // Make the text field transparent
         card_field.setFont(new Font("Arial", Font.BOLD,14));
-        card_field.setForeground(Color.WHITE); //set the text inside become white
+        card_field.setForeground(Color.BLACK); //set the text inside become white
         add(card_field);
 
         //display pin text
         pin_msg = new JLabel("PIN: ");
-        pin_msg.setFont(new Font("Ralway", Font.BOLD, 28));
+        pin_msg.setFont(new Font("Ral way", Font.BOLD, 28));
         pin_msg.setForeground(Color.WHITE);
         pin_msg.setBounds(200,150,375,30);
         add(pin_msg);
@@ -45,13 +44,13 @@ public class Login extends JFrame implements ActionListener //Login class inheri
         pin_field.setBounds(325,150,230,30);
         pin_field.setOpaque(false); // Make the text field transparent
         pin_field.setFont(new Font("Arial", Font.BOLD, 14));
-        pin_field.setForeground(Color.WHITE);
+        pin_field.setForeground(Color.BLACK);
         add(pin_field);
 
         //create sign in button
         sign_in_button = new JButton("SIGN IN");
         sign_in_button.setFont(new Font("Arial", Font.BOLD, 14));
-        sign_in_button.setForeground(Color.WHITE);
+        sign_in_button.setForeground(Color.BLACK);
         sign_in_button.setOpaque(false);
         sign_in_button.setContentAreaFilled(false); //prevents the JButton from painting the content area with the default light grey color.
         sign_in_button.setBounds(325,200,100, 30);
@@ -61,7 +60,7 @@ public class Login extends JFrame implements ActionListener //Login class inheri
         //create clear button
         clear_button = new JButton("CLEAR");
         clear_button.setFont(new Font("Arial", Font.BOLD, 14));
-        clear_button.setForeground(Color.WHITE);
+        clear_button.setForeground(Color.BLACK);
         clear_button.setOpaque(false);
         clear_button.setContentAreaFilled(false);
         clear_button.setBounds(455,200,100, 30);
@@ -71,12 +70,21 @@ public class Login extends JFrame implements ActionListener //Login class inheri
         //create sign up button
         sign_up_button = new JButton("SIGN UP");
         sign_up_button.setFont(new Font("Arial", Font.BOLD, 14));
-        sign_up_button.setForeground(Color.WHITE);
+        sign_up_button.setForeground(Color.BLACK);
         sign_up_button.setOpaque(false);
         sign_up_button.setContentAreaFilled(false);
         sign_up_button.setBounds(325,240,230, 30);
         sign_up_button.addActionListener(this);
         add(sign_up_button);
+
+        exit_button = new JButton("EXIT");
+        exit_button.setFont(new Font("Arial", Font.BOLD, 14));
+        exit_button.setForeground(Color.BLACK);
+        exit_button.setOpaque(false);
+        exit_button.setContentAreaFilled(false);
+        exit_button.setBounds(325,280,230,30);
+        exit_button.addActionListener(this);
+        add(exit_button);
 
         //load bank bg
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/bank_bg.png"));
@@ -89,9 +97,17 @@ public class Login extends JFrame implements ActionListener //Login class inheri
         //set up window
         setLayout(null); //disables automatic component arrangement, allowing manual control of component positions and sizes with setBounds().
         setSize(850, 480);
-        setLocation(350,200);
+        centerWindowOnScreen();
         setUndecorated(true);
         setVisible(true);
+    }
+
+    public void centerWindowOnScreen()
+    {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - getWidth()) / 2;
+        int y = (screenSize.height - getHeight()) / 2;
+        setLocation(x, y);
     }
 
     @Override
@@ -104,8 +120,7 @@ public class Login extends JFrame implements ActionListener //Login class inheri
                 Custom_connection c = new Custom_connection();
                 String card_num = card_field.getText();
                 String pin = pin_field.getText();
-                String query = "select * from login where card_number = '"+card_num+"' and pin = '"+pin+"'"; //retrieve data from login table
-                ResultSet resultSet = c.j_statement.executeQuery(query); //contains the records retrieved by the query.
+                ResultSet resultSet = c.j_statement.executeQuery("select * from login where card_number = '"+card_num+"' and pin = '"+pin+"'"); //retrieve data from mysql.
                 if (resultSet.next()) //If resultSet.next() returns true, it means there is at least one matching record (card_num,pin) in the MySQL database.
                 {
                     setVisible(false);
@@ -124,6 +139,9 @@ public class Login extends JFrame implements ActionListener //Login class inheri
                 new Signup1();
                 setVisible(false);
             }
+            else
+                System.exit(0);
+
         }
         catch (Exception error)
         {

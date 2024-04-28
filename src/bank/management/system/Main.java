@@ -7,14 +7,14 @@ import java.awt.event.ActionListener;
 public class Main extends JFrame implements ActionListener
 {
     private final String PIN; //final make pin constant
-    JButton deposit_button, withdraw_button, fc_button, mini_button, pin_change_button, balance_button, exit_button;
+    JButton deposit_button, withdraw_button, tr_button, mini_button, pin_change_button, balance_button, exit_button, tutorial_button;
     Main(String pin)
     {
         super();
 
         this.PIN = pin;
         JLabel label = new JLabel("Please Select Your Transaction");
-        label.setBounds(225,100,700,35);
+        label.setBounds(200,100,700,35);
         label.setForeground(Color.BLACK);
         label.setFont(new Font("System",Font.BOLD,28));
         add(label);
@@ -35,13 +35,13 @@ public class Main extends JFrame implements ActionListener
         withdraw_button.addActionListener(this);
         add(withdraw_button);
 
-        fc_button = new JButton("FAST CASH");
-        fc_button.setForeground(Color.BLACK);
-        fc_button.setOpaque(false);
-        fc_button.setContentAreaFilled(false);
-        fc_button.setBounds(200,260,150,35);
-        fc_button.addActionListener(this);
-        add(fc_button);
+        tr_button = new JButton("TRANSFER");
+        tr_button.setForeground(Color.BLACK);
+        tr_button.setOpaque(false);
+        tr_button.setContentAreaFilled(false);
+        tr_button.setBounds(200,260,150,35);
+        tr_button.addActionListener(this);
+        add(tr_button);
 
         mini_button = new JButton("MINI STATEMENT");
         mini_button.setForeground(Color.BLACK);
@@ -67,25 +67,41 @@ public class Main extends JFrame implements ActionListener
         balance_button.addActionListener(this);
         add(balance_button);
 
-        exit_button = new JButton("EXIT");
-        exit_button.setForeground(Color.WHITE);
+        tutorial_button = new JButton("TUTORIAL");
+        tutorial_button.setForeground(Color.BLACK);
+        tutorial_button.setOpaque(false);
+        tutorial_button.setContentAreaFilled(false);
+        tutorial_button.setBounds(620,600,150,35);
+        tutorial_button.addActionListener(this);
+        add(tutorial_button);
+
+        exit_button = new JButton("lOG OUT");
+        exit_button.setForeground(Color.BLACK);
         exit_button.setBackground(new Color(65,125,128));
         exit_button.setBounds(620,650,150,35);
         exit_button.addActionListener(this);
         add(exit_button);
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/main_bg.png"));
-        Image i2 = i1.getImage().getScaledInstance(840, 750, Image.SCALE_DEFAULT);
+        Image i2 = i1.getImage().getScaledInstance(840, 800, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel deposit_bg = new JLabel(i3);
-        deposit_bg.setBounds(0, 0, 840, 750);
+        deposit_bg.setBounds(0, 0, 840, 800);
         add(deposit_bg);
 
         setLayout(null);
         setSize(850, 800);
-        setLocation(360, 20);
+        centerWindowOnScreen();
         setUndecorated(true);
         setVisible(true);
+    }
+
+    public void centerWindowOnScreen()
+    {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - getWidth()) / 2;
+        int y = (screenSize.height - getHeight()) / 2;
+        setLocation(x, y);
     }
 
     public void actionPerformed(ActionEvent e)
@@ -93,25 +109,34 @@ public class Main extends JFrame implements ActionListener
         if (e.getSource() == deposit_button){
             new Deposit(PIN);
             setVisible(false);
-        }else if (e.getSource() == exit_button)
-            System.exit(0);
-        else if (e.getSource() == withdraw_button) {
+        }else if (e.getSource() == exit_button) {
+            new Login();
+            setVisible(false);
+        } else if (e.getSource() == withdraw_button) {
             new Withdraw(PIN);
             setVisible(false);
         } else if (e.getSource() == balance_button) {
             new Balance(PIN);
             setVisible(false);
         }
-        /*else if (e.getSource() == fc_button) {
-            new FastCash(pin);
+        else if (e.getSource() == tr_button) {
+            new Transfer(PIN);
             setVisible(false);
-        } else if (e.getSource() == pin_change_button) {
-            new Pin(pin);
-            setVisible(false);
-        } else if (e.getSource() == mini_button) {
-            new mini(pin);
         }
-        */
+        else if (e.getSource() == pin_change_button) {
+            new Pin(PIN);
+            setVisible(false);
+        }
+        else if (e.getSource() == mini_button) {
+            new TransactionHistory(PIN);
+            setVisible(false);
+        }
+        else
+        {
+            new Tutorial(PIN);
+            setVisible(false);
+        }
+
     }
 
     public static void main(String[] args)

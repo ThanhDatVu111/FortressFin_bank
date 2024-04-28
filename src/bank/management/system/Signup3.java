@@ -119,7 +119,7 @@ public class Signup3 extends JFrame implements ActionListener
         c7 = new JCheckBox("I here by declares that the above entered details correct to the best of my knowledge.",true); //checked by default
         c7.setOpaque(false);;
         c7.setFont(new Font("Rale way",Font.BOLD,16));
-        c7.setBounds(50,550,700,20);
+        c7.setBounds(50,550,800,20);
         add(c7);
 
         submit_button = new JButton("Submit");
@@ -139,17 +139,25 @@ public class Signup3 extends JFrame implements ActionListener
         add(cancel_button);
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/signup3_bg.png"));
-        Image i2 = i1.getImage().getScaledInstance(840, 800, Image.SCALE_DEFAULT);
+        Image i2 = i1.getImage().getScaledInstance(850, 800, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel bg_image = new JLabel(i3);
-        bg_image.setBounds(0, 0, 840, 800);
+        bg_image.setBounds(0, 0, 850, 800);
         add(bg_image);
 
         setLayout(null);
         setSize(850, 800);
-        setLocation(360, 20);
+        centerWindowOnScreen();
         setUndecorated(true);
         setVisible(true);
+    }
+
+    public void centerWindowOnScreen()
+    {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - getWidth()) / 2;
+        int y = (screenSize.height - getHeight()) / 2;
+        setLocation(x, y);
     }
 
     public void actionPerformed(ActionEvent e)
@@ -198,7 +206,7 @@ public class Signup3 extends JFrame implements ActionListener
             if (e.getSource() == submit_button)
             {
                 if (atype.equals("") || !c7.isSelected() || !c6.isSelected() || !c5.isSelected()|| !c4.isSelected()|| !c3.isSelected()|| !c2.isSelected()|| !c1.isSelected())
-                    JOptionPane.showMessageDialog(null, "Choose your account type and we offer same service for every account");
+                    JOptionPane.showMessageDialog(null, "Choose your account type and we offer same service for every account, please select all.");
                 else
                 {
                     Custom_connection c = new Custom_connection();
@@ -212,7 +220,10 @@ public class Signup3 extends JFrame implements ActionListener
                 }
             }
             else if (e.getSource()== cancel_button)
-                System.exit(0);
+            {
+                new Login();
+                setVisible(false);
+            }
         }
         catch (Exception E)
         {

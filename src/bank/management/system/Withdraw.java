@@ -32,7 +32,7 @@ public class Withdraw extends JFrame implements ActionListener
         withdraw_field = new JTextField();
         withdraw_field.setFont(new Font("Rale way", Font.BOLD,22));
         withdraw_field.setOpaque(false);
-        withdraw_field.setForeground(Color.WHITE);
+        withdraw_field.setForeground(Color.BLACK);
         withdraw_field.setBounds(450,250,320,25);
         add(withdraw_field);
 
@@ -64,9 +64,17 @@ public class Withdraw extends JFrame implements ActionListener
         getContentPane().setBackground(Color.ORANGE);
         setLayout(null);
         setSize(850,800);
-        setLocation(360,20);
+        centerWindowOnScreen();
         setUndecorated(true);
         setVisible(true);
+    }
+
+    public void centerWindowOnScreen()
+    {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - getWidth()) / 2;
+        int y = (screenSize.height - getHeight()) / 2;
+        setLocation(x, y);
     }
 
     public void actionPerformed(ActionEvent e)
@@ -77,8 +85,8 @@ public class Withdraw extends JFrame implements ActionListener
             {
                 String amount = withdraw_field.getText();
                 Date date = new Date();
-                if (withdraw_field.getText().isEmpty())
-                    JOptionPane.showMessageDialog(null, "Please enter the amount you want to withdraw");
+                if (withdraw_field.getText().isEmpty() || !amount.matches("\\d+") || Integer.parseInt(amount) > 3000)
+                    JOptionPane.showMessageDialog(null, "The withdraw amount is invalid, Please try again");
                 else
                 {
                     Custom_connection c = new Custom_connection();
@@ -88,7 +96,7 @@ public class Withdraw extends JFrame implements ActionListener
                                             // which mean there are account match the pin.
                     {
                         //add into balance variable so we know the current balance of the account.
-                        if (resultSet.getString("type").equals("Deposit"))
+                        if (resultSet.getString("type").equals("Deposit")  || resultSet.getString("type").equals("Received"))
                             balance += Integer.parseInt(resultSet.getString("amount"));
                         else
                             balance -= Integer.parseInt(resultSet.getString("amount"));

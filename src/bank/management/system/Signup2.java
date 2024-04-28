@@ -36,7 +36,7 @@ public class Signup2 extends JFrame implements ActionListener
         religion_text.setBounds(50,150,100,30);
         add(religion_text);
 
-        String[] religion_arr = {"Buddhist","Muslim","Catholic", "Christian", "Other"};
+        String[] religion_arr = {"Buddhist","Muslim","Catholic", "Christian", "Other", "Prefer not to disclose"};
         religion_box = new JComboBox<>(religion_arr);
         religion_box.setFont(new Font("Rale way",Font.BOLD,14));
         religion_box.setBounds(190,150,300,30);
@@ -48,7 +48,7 @@ public class Signup2 extends JFrame implements ActionListener
         income_text.setBounds(50,200,100,30);
         add(income_text);
 
-        String[] income_arr = {"Null","less than 25.000$","less than 50.000$", "less than 75.000$", "less than 100.000$","Above 100.000$"};
+        String[] income_arr = {"Null","less than 25.000$","less than 50.000$", "less than 75.000$", "less than 100.000$","Above 100.000$","Prefer not to disclose"};
         income_box = new JComboBox<>(income_arr);
         income_box.setFont(new Font("Rale way",Font.BOLD,14));
         income_box.setBounds(190,200,300,30);;
@@ -60,7 +60,7 @@ public class Signup2 extends JFrame implements ActionListener
         edu_text.setBounds(50,250,150,30);
         add(edu_text);
 
-        String[] educational_arr = {"Non-Graduate","Graduate","Post-Graduate", "Doctorate", "Others"};
+        String[] educational_arr = {"Non-Graduate","Graduate","Post-Graduate", "Doctorate", "Others", "Prefer not to disclose"};
         edu_box = new JComboBox<>(educational_arr);
         edu_box.setBackground(new Color(252, 117,76));
         edu_box.setFont(new Font("Rale way",Font.BOLD,14));
@@ -72,7 +72,7 @@ public class Signup2 extends JFrame implements ActionListener
         occup_text.setBounds(50,300,150,30);
         add(occup_text);
 
-        String[] occupation_arr= {"Salaried","Self-Employed","Business", "Student", "Retired", "Other"};
+        String[] occupation_arr= {"Salaried","Self-Employed","Business", "Student", "Retired", "Other", "Prefer not to disclose"};
         occup_box = new JComboBox<>(occupation_arr);
         occup_box.setBackground(new Color(252, 117,76));
         occup_box.setFont(new Font("Rale way",Font.BOLD,14));
@@ -84,14 +84,14 @@ public class Signup2 extends JFrame implements ActionListener
         ethnic_text.setBounds(50,350,150,30);
         add(ethnic_text);
 
-        String[] ethnic_arr = {"Caucasian","Asian","African American", "Native American", "Hispanic"};
+        String[] ethnic_arr = {"Caucasian","Asian","African American", "Native American", "Hispanic", "Prefer not to disclose"};
         ethnic_box = new JComboBox<>(ethnic_arr);
         ethnic_box.setBackground(new Color(252, 117,76));
         ethnic_box.setFont(new Font("Rale way",Font.BOLD,14));
         ethnic_box.setBounds(190,350,300,30);
         add(ethnic_box);
 
-        JLabel labelDl = new JLabel("DLicense:");
+        JLabel labelDl = new JLabel("ID:");
         labelDl.setFont(new Font("Rale way", Font.BOLD, 20));
         labelDl.setBounds(50,400,200,30);
         add(labelDl);
@@ -99,22 +99,22 @@ public class Signup2 extends JFrame implements ActionListener
         text_driver_license = new JTextField();
         text_driver_license.setFont(new Font("Rale way",Font.BOLD, 14));
         text_driver_license.setBounds(190,400,300,30);
-        text_driver_license.setBackground(new Color(252, 117,76));
+        text_driver_license.setBackground(Color.WHITE);
         add(text_driver_license);
 
-        JLabel senior_text = new JLabel("Are you a senior citizen:");
+        JLabel senior_text = new JLabel("Are you above 65 years old:");
         senior_text.setFont(new Font("Rale way", Font.BOLD,18));
-        senior_text.setBounds(50,450,250,30);
+        senior_text.setBounds(50,450,270,30);
         add(senior_text);
 
         c1 = new JRadioButton("Yes");
-        c1.setBounds(300,450,100,30);
+        c1.setBounds(350,450,100,30);
         c1.setOpaque(false);
         c1.setFont(new Font("Rale way", Font.BOLD,14));
         add(c1);
 
         c2 = new JRadioButton("No");
-        c2.setBounds(400,450,100,30);
+        c2.setBounds(450,450,100,30);
         c2.setOpaque(false);
         c2.setFont(new Font("Rale way", Font.BOLD,14));
         add(c2);
@@ -125,13 +125,13 @@ public class Signup2 extends JFrame implements ActionListener
         add(disab_text);
 
         d1 = new JRadioButton("Yes");
-        d1.setBounds(300,500,100,30);
+        d1.setBounds(350,500,100,30);
         d1.setOpaque(false);
         d1.setFont(new Font("Rale way", Font.BOLD,14));
         add(d1);
 
         d2 = new JRadioButton("No");
-        d2.setBounds(400,500,100,30);
+        d2.setBounds(450,500,100,30);
         d2.setOpaque(false);
         d2.setFont(new Font("Rale way", Font.BOLD,14));
         add(d2);
@@ -153,7 +153,7 @@ public class Signup2 extends JFrame implements ActionListener
         cv2.setFont(new Font("Rale way", Font.BOLD,14));
         add(cv2);
 
-        JLabel legal_text= new JLabel("Are you legally to work in this country:");
+        JLabel legal_text= new JLabel("Are you authorized to work in this country:");
         legal_text.setFont(new Font("Rale way", Font.BOLD,18));
         legal_text.setBounds(50,600,400,30);
         add(legal_text);
@@ -216,17 +216,25 @@ public class Signup2 extends JFrame implements ActionListener
         add(next_button);
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/signup2_bg.png"));
-        Image i2 = i1.getImage().getScaledInstance(840,800,Image.SCALE_DEFAULT);
+        Image i2 = i1.getImage().getScaledInstance(850,800,Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel bg_image = new JLabel(i3);
-        bg_image.setBounds(0,0,840,800);
+        bg_image.setBounds(0,0,850,800);
         add(bg_image);
 
         setLayout(null);
         setSize(850,800);
-        setLocation(360,20);
+        centerWindowOnScreen();
         setUndecorated(true);
         setVisible(true);
+    }
+
+    public void centerWindowOnScreen()
+    {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - getWidth()) / 2;
+        int y = (screenSize.height - getHeight()) / 2;
+        setLocation(x, y);
     }
 
     public void actionPerformed(ActionEvent e) //actionPerformed method from the ActionListener, get called when users hit next button
