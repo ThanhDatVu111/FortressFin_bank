@@ -1,4 +1,5 @@
-FortressFin Banking Application
+#FortressFin Banking Application
+
 FortressFin is a Java-based banking application that simulates basic banking operations such as depositing, withdrawing, transferring funds, and viewing transaction history. The application integrates with MySQL to securely store user data.
 
 Features
