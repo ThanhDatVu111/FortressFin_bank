@@ -3,7 +3,7 @@
 FortressFin is a Java-based banking application that simulates basic banking operations such as depositing, withdrawing, transferring funds, and viewing transaction history. The application integrates with MySQL to securely store user data.
 
 
-**Features**
+# Features
 
 Sign Up
 Allows users to create an account by providing necessary information.
@@ -38,7 +38,7 @@ Displays a main menu allowing users to interact with different functionalities/c
 Users can navigate between features such as deposit, withdraw, transfer, pin change, and more by clicking button.
 
 
-**Project Structure**
+# Project Structure
 
 Balance.java: Handles account balance related operations.
 
@@ -63,7 +63,7 @@ Tutorial.java: Provides tutorial and guide for users.
 Withdraw.java: Implements fund withdrawal functionality.
 
 
-**Usage**
+# Usage
 
 Clone the repository to your local machine.
 
@@ -76,11 +76,11 @@ Run Login.java to launch the application.
 Explore various banking features using the intuitive user interface.
 
 
-**Contributing**
+# Contributing
 
 Contributions are welcome! If you have any suggestions or feature requests, feel free to open an issue or submit a pull request.
 
 
-**License**
+# License
 
 This project is licensed under the MIT License.
