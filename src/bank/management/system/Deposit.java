@@ -73,13 +73,13 @@ public class Deposit extends JFrame implements ActionListener
             {
                 String amount = deposit_field.getText();
                 Date date = new Date();
-                if (deposit_field.getText().isEmpty() || !amount.matches("\\d+")) // Check if the input is not empty and contains only numbers
-                    JOptionPane.showMessageDialog(null,"Please enter the valid amount to deposit");
+                if (deposit_field.getText().isEmpty() || !amount.matches("\\d+") || Integer.parseInt(amount) < 0) // Check if the input is not empty and contains only numbers
+                    JOptionPane.showMessageDialog(null,"Please enter a valid amount to deposit");
                 else
                 {
                     Custom_connection c = new Custom_connection();
                     c.j_statement.executeUpdate("insert into bank values('"+PIN+"', '"+date+"','Deposit', '"+amount+"')");
-                    JOptionPane.showMessageDialog(null,"Successfully deposited "+amount+"$");
+                    JOptionPane.showMessageDialog(null,"Successfully deposited $"+amount);
                     deposit_field.setText("");
                 }
             }

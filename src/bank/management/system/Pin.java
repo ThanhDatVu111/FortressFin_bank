@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class Pin extends JFrame implements ActionListener
 {
-    private final String PIN; //this allow access the PIN value at multiple points within the class (beyond just the constructor)
+    String PIN; //this allow access the PIN value at multiple points within the class (beyond just the constructor)
     JPasswordField p1,p2;
     JButton b1,b2;
     Pin(String pin)
@@ -90,6 +90,11 @@ public class Pin extends JFrame implements ActionListener
                 }
                 if (pin1.length() != 4 && pin2.length() != 4)
                 {
+                    JOptionPane.showMessageDialog(null,"The length of both two pins is 4 both field.");
+                    return;
+                }
+                if (!pin1.matches("\\d+") && !pin2.matches("\\d+"))
+                {
                     JOptionPane.showMessageDialog(null,"Please enter 4 digit pin for both field.");
                     return;
                 }
@@ -108,6 +113,7 @@ public class Pin extends JFrame implements ActionListener
                 String q3 = "update signup3 set pin = '"+pin2+"' where pin = '"+PIN+"'";
                 c.j_statement.executeUpdate(q3);
                 JOptionPane.showMessageDialog(null,"PIN changed successfully");
+                PIN = pin2;
                 p1.setText("");
                 p2.setText("");
             }

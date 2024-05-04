@@ -127,7 +127,7 @@ public class Login extends JFrame implements ActionListener //Login class inheri
                     new Main(pin);
                 }
                 else
-                    JOptionPane.showMessageDialog(null,"Incorrect Card Number or PIN");
+                    JOptionPane.showMessageDialog(null,"Incorrect card number or PIN");
             }
             else if(e.getSource() == clear_button)
             {

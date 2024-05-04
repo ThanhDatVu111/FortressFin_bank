@@ -31,6 +31,10 @@ public class TransactionHistory extends JFrame implements ActionListener
         balance_info.setFont(new Font("Rale way", Font.BOLD,19));
         add(balance_info);
 
+        JPanel content_panel = new JPanel(); // Panel to hold transaction records
+        content_panel.setLayout(new BoxLayout(content_panel, BoxLayout.Y_AXIS));
+        //we are using BoxLayout with BoxLayout.Y_AXIS alignment.
+        //This means that the components added to contentPanel will be arranged vertically
         try
         {
             Custom_connection c = new Custom_connection();
@@ -58,6 +62,7 @@ public class TransactionHistory extends JFrame implements ActionListener
                         resultSet.getString("date")+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+ //space
                         resultSet.getString("type")+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+ //space
                         resultSet.getString("amount")+ "$<br><br>"); //break line
+                content_panel.add(transac_statement);
 
                 if (resultSet.getString("type").equals("Deposit") || resultSet.getString("type").equals("Received"))
                     balance += Integer.parseInt(resultSet.getString("amount"));
@@ -66,11 +71,17 @@ public class TransactionHistory extends JFrame implements ActionListener
             }
 
             balance_info.setText("Your Total Balance is $ "+balance);
+            content_panel.add(balance_info);
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+        JScrollPane scroll_pane = new JScrollPane(content_panel); // Add contentPanel to JScrollPane
+        scroll_pane.setBounds(150, 250, 500, 400); // Set bounds for the scroll pane
+        add(scroll_pane);
+        //adding contentPanel to a JScrollPane provides scrolling
+        //functionality and ensures that all contents of contentPanel are visible
 
         back_button = new JButton("BACK");
         back_button.setBounds(350,700,150,35);

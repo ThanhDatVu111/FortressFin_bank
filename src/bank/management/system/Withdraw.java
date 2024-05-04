@@ -17,7 +17,7 @@ public class Withdraw extends JFrame implements ActionListener
         super();
         this.PIN = pin;
 
-        JLabel label1 = new JLabel("MAXIMUM WITHDRAWAL IS 3000$ PER DAY");
+        JLabel label1 = new JLabel("MAXIMUM WITHDRAWAL IS $3000 PER DAY");
         label1.setForeground(Color.WHITE);
         label1.setFont(new Font("System", Font.BOLD, 25));
         label1.setBounds(150,180,700,35);
@@ -86,7 +86,7 @@ public class Withdraw extends JFrame implements ActionListener
                 String amount = withdraw_field.getText();
                 Date date = new Date();
                 if (withdraw_field.getText().isEmpty() || !amount.matches("\\d+") || Integer.parseInt(amount) > 3000)
-                    JOptionPane.showMessageDialog(null, "The withdraw amount is invalid, Please try again");
+                    JOptionPane.showMessageDialog(null, "The withdraw amount is invalid and cannot be more than $3000 a day, Please try again");
                 else
                 {
                     Custom_connection c = new Custom_connection();
@@ -103,11 +103,11 @@ public class Withdraw extends JFrame implements ActionListener
                     }
                     if (balance < Integer.parseInt(amount))
                     {
-                        JOptionPane.showMessageDialog(null, "Insufficient Balance, Please try again");
+                        JOptionPane.showMessageDialog(null, "Insufficient balance, Please try again");
                         return;
                     }
                     c.j_statement.executeUpdate("insert into bank values('" + PIN + "', '" + date + "', 'Withdraw', '" + amount + "' )");
-                    JOptionPane.showMessageDialog(null, "Successfully withdraw "+amount+"$");
+                    JOptionPane.showMessageDialog(null, "Successfully withdrew $"+amount);
                     withdraw_field.setText("");
                 }
             } catch (Exception E) {

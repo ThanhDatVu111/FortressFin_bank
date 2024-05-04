@@ -104,19 +104,19 @@ public class Signup3 extends JFrame implements ActionListener
         c4.setBounds(300,450,200,30);
         add(c4);
 
-        c5 = new JCheckBox("Mini statement",true);
+        c5 = new JCheckBox("Transaction History",true);
         c5.setOpaque(false);
         c5.setFont(new Font("Rale way",Font.BOLD,18));
-        c5.setBounds(50,500,200,30);
+        c5.setBounds(50,500,230,30);
         add(c5);
 
-        c6 = new JCheckBox("Fast cash",true);
+        c6 = new JCheckBox("Transfer",true);
         c6.setOpaque(false);
         c6.setFont(new Font("Rale way",Font.BOLD,18));
         c6.setBounds(300,500,200,30);
         add(c6);
 
-        c7 = new JCheckBox("I here by declares that the above entered details correct to the best of my knowledge.",true); //checked by default
+        c7 = new JCheckBox("I here by declare that the above entered details are correct to the best of my knowledge.",true); //checked by default
         c7.setOpaque(false);;
         c7.setFont(new Font("Rale way",Font.BOLD,16));
         c7.setBounds(50,550,800,20);
@@ -193,11 +193,11 @@ public class Signup3 extends JFrame implements ActionListener
         else if (c2.isSelected())
             fac = fac+"Withdraw";
         else if (c3.isSelected())
-            fac = fac+"Fast cash";
+            fac = fac+"Transfer";
         else if (c4.isSelected())
             fac = fac+"Balance";
         else if (c5.isSelected())
-            fac=fac+"Mini Statement";
+            fac=fac+"Transaction History";
         else if (c6.isSelected())
             fac=fac+"Pin change";
 

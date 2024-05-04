@@ -16,7 +16,7 @@ public class Balance extends JFrame implements ActionListener
         super();
         this.PIN = pin;
 
-        balance_msg = new JLabel("Your Current Balance is $");
+        balance_msg = new JLabel("YOUR CURRENT BALANCE is $");
         balance_msg.setForeground(Color.BLACK);
         balance_msg.setFont(new Font("System", Font.BOLD, 24));
         balance_msg.setBounds(100,150,330,35);

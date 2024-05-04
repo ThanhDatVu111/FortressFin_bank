@@ -1,6 +1,7 @@
 package bank.management.system;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Calendar;
 import java.util.Random;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionEvent;
@@ -47,7 +48,7 @@ public class Signup1 extends JFrame implements ActionListener
         text_name.setOpaque(false); // Make the text field transparent
         add(text_name);
 
-        JLabel fav_hero = new JLabel("Hero's Name:");
+        JLabel fav_hero = new JLabel("Pet's Name:");
         fav_hero.setFont(new Font("Rale way", Font.BOLD, 20));
         fav_hero.setBounds(50,200,200,30);
         add(fav_hero);
@@ -64,7 +65,7 @@ public class Signup1 extends JFrame implements ActionListener
         add(DOB);
 
         dateChooser = new JDateChooser();
-        dateChooser.setBounds(190,250,120,30);
+        dateChooser.setBounds(190,250,170,30);
         dateChooser.setOpaque(false);
         add(dateChooser);
 
@@ -85,10 +86,10 @@ public class Signup1 extends JFrame implements ActionListener
         g2.setBounds(290,300,100,30);
         add(g2);
 
-        g3 = new JRadioButton("Others");
+        g3 = new JRadioButton("Other/prefer not to say");
         g3.setFont(new Font("Rale way", Font.BOLD,14));
         g3.setOpaque(false);
-        g3.setBounds(400,300,100,30);
+        g3.setBounds(400,300,300,30);
         add(g3);
 
         JLabel labelEmail = new JLabel("Email:");
@@ -102,19 +103,19 @@ public class Signup1 extends JFrame implements ActionListener
         text_email.setOpaque(false);
         add(text_email);
 
-        JLabel marry_status = new JLabel("Marry Status:");
+        JLabel marry_status = new JLabel("Marital Status:");
         marry_status.setFont(new Font("Rale way", Font.BOLD, 20));
         marry_status.setBounds(50,400,200,30);
         add(marry_status);
 
         m1 = new JRadioButton("Married");
-        m1.setBounds(190,400,100,30);
+        m1.setBounds(240,400,100,30);
         m1.setOpaque(false);
         m1.setFont(new Font("Rale way", Font.BOLD,14));
         add(m1);
 
         m2 = new JRadioButton("Unmarried");
-        m2.setBounds(290,400,110,30);
+        m2.setBounds(340,400,110,30);
         m2.setOpaque(false);
         m2.setFont(new Font("Rale way", Font.BOLD,14));
         add(m2);
@@ -207,6 +208,20 @@ public class Signup1 extends JFrame implements ActionListener
         String name = text_name.getText();
         String hero_name = text_hero.getText();
         String date_of_birth = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
+        int year = Integer.parseInt(date_of_birth.substring(date_of_birth.lastIndexOf(",") + 2));
+        int current_year = Calendar.getInstance().get(Calendar.YEAR);
+        if (year > current_year)
+        {
+            JOptionPane.showMessageDialog(null, "Invalid birth date. Please enter a date in the past.");
+            return;
+        }
+        int age = current_year - year;
+        if (age < 18)
+        {
+            JOptionPane.showMessageDialog(null, "Sorry, you must be at least 18 years old to create a bank account.");
+            return;
+        }
+
         String gender = null;
         if (g1.isSelected())
             gender = "Male";

@@ -27,7 +27,7 @@ public class Main extends JFrame implements ActionListener
         deposit_button.addActionListener(this);
         add(deposit_button);
 
-        withdraw_button = new JButton("CASH WITHDRAW");
+        withdraw_button = new JButton("WITHDRAW");
         withdraw_button.setForeground(Color.BLACK);
         withdraw_button.setOpaque(false);
         withdraw_button.setContentAreaFilled(false);
@@ -43,11 +43,11 @@ public class Main extends JFrame implements ActionListener
         tr_button.addActionListener(this);
         add(tr_button);
 
-        mini_button = new JButton("MINI STATEMENT");
+        mini_button = new JButton("TRANSACTION HISTORY");
         mini_button.setForeground(Color.BLACK);
         mini_button.setOpaque(false);
         mini_button.setContentAreaFilled(false);
-        mini_button.setBounds(500,260,150,35);
+        mini_button.setBounds(500,260,200,35);
         mini_button.addActionListener(this);
         add(mini_button);
 
@@ -59,7 +59,7 @@ public class Main extends JFrame implements ActionListener
         pin_change_button.addActionListener(this);
         add(pin_change_button);
 
-        balance_button = new JButton("BALANCE ENQUIRY");
+        balance_button = new JButton("BALANCE INQUIRY");
         balance_button.setForeground(Color.BLACK);
         balance_button.setOpaque(false);
         balance_button.setContentAreaFilled(false);

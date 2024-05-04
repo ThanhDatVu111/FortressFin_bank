@@ -48,7 +48,7 @@ public class Signup2 extends JFrame implements ActionListener
         income_text.setBounds(50,200,100,30);
         add(income_text);
 
-        String[] income_arr = {"Null","less than 25.000$","less than 50.000$", "less than 75.000$", "less than 100.000$","Above 100.000$","Prefer not to disclose"};
+        String[] income_arr = {"Null","less than $25.000","less than $50.000", "less than $75.000", "less than $100.000","Above $100.000","Prefer not to disclose"};
         income_box = new JComboBox<>(income_arr);
         income_box.setFont(new Font("Rale way",Font.BOLD,14));
         income_box.setBounds(190,200,300,30);;
@@ -84,7 +84,7 @@ public class Signup2 extends JFrame implements ActionListener
         ethnic_text.setBounds(50,350,150,30);
         add(ethnic_text);
 
-        String[] ethnic_arr = {"Caucasian","Asian","African American", "Native American", "Hispanic", "Prefer not to disclose"};
+        String[] ethnic_arr = {"Caucasian","Asian","African American", "Native American", "Hispanic", "Other / Mixed", "Prefer not to disclose"};
         ethnic_box = new JComboBox<>(ethnic_arr);
         ethnic_box.setBackground(new Color(252, 117,76));
         ethnic_box.setFont(new Font("Rale way",Font.BOLD,14));

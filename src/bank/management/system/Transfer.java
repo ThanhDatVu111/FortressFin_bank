@@ -108,7 +108,10 @@ public class Transfer extends JFrame implements ActionListener
                 String recipient_name = name_field.getText();
                 String card_number = card_field.getText();
                 if (recipient_name.isEmpty() || card_number.isEmpty() || !card_number.matches("\\d+")) // Check if the input is not empty and contains only numbers
-                    JOptionPane.showMessageDialog(null,"Please enter the valid information to transfer");
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter valid information to transfer");
+                    return;
+                }
                 else
                 {
                     Custom_connection c = new Custom_connection();
@@ -117,8 +120,8 @@ public class Transfer extends JFrame implements ActionListener
                     {
 
                         String form_num = resultSet.getString("form_num"); //recipient form_num
-                        ResultSet resultSet1 = c.j_statement.executeQuery("select * from login where card_number = '"+card_number+"' and form_num = '"+form_num+"'");
-                        if(resultSet1.next()) //if the card info also correct.
+                        ResultSet resultSet1 = c.j_statement.executeQuery("select * from login where card_number = '" + card_number + "' and form_num = '" + form_num + "'");
+                        if (resultSet1.next()) //if the card info also correct.
                         {
                             String recipient_pin = resultSet1.getString("pin");
 
@@ -142,22 +145,27 @@ public class Transfer extends JFrame implements ActionListener
                             String amount = transfer_field.getText();
                             if (amount.isEmpty() || !amount.matches("\\d+") || Integer.parseInt(amount) > balance)
                                 JOptionPane.showMessageDialog(null, "Sorry, the withdrawal amount is invalid or your account balance is insufficient to complete the transfer. Please try again");
-                            else
-                            {
+                            else {
                                 //after everything is right, we take out the money and transfer the amount into recipient account
                                 c.j_statement.executeUpdate("insert into bank values('" + PIN + "', '" + date + "', 'Sent', '" + amount + "' )");
                                 c.j_statement.executeUpdate("insert into bank values('" + recipient_pin + "', '" + date + "', 'Received', '" + amount + "' )");
-                                JOptionPane.showMessageDialog(null,"Successfully sending "+amount+"$ to "+recipient_name+" with card number of " +card_number);
+                                JOptionPane.showMessageDialog(null, "Successfully sending $" + amount + " to " + recipient_name + " with card number of " + card_number);
                                 name_field.setText("");
                                 card_field.setText("");
                                 transfer_field.setText("");
                             }
                         }
                         else
-                            JOptionPane.showMessageDialog(null,"The card number is not correct. Please try again");
+                        {
+                            JOptionPane.showMessageDialog(null, "The card number is not correct. Please try again");
+                            return;
+                        }
                     }
                     else
-                        JOptionPane.showMessageDialog(null,"The recipient name is not exist in our data. Please try again");
+                    {
+                        JOptionPane.showMessageDialog(null,"The recipient name does not exist in our data. Please try again");
+                        return;
+                    }
                 }
             }
             catch (Exception E)
