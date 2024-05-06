@@ -14,10 +14,10 @@ public class Signup1 extends JFrame implements ActionListener
     static String rand_form_num = " " + num;   // Java's automatic type conversion feature,
                                   // where if one operand of the + operator is a String,
                                  // the other operand is converted to a String
-    JTextField text_name, text_hero, text_email, text_address, text_zip, text_state, text_city;
+    JTextField text_name, text_pet, text_email, text_address, text_zip, text_state, text_city;
     JDateChooser dateChooser;
     JRadioButton g1, g2, g3, m1, m2;
-    JButton next_button;
+    JButton next_button, back_button;
     Signup1()
     {
         super ();
@@ -53,11 +53,11 @@ public class Signup1 extends JFrame implements ActionListener
         fav_hero.setBounds(50,200,200,30);
         add(fav_hero);
 
-        text_hero = new JTextField();
-        text_hero.setFont(new Font("Rale way",Font.BOLD, 14));
-        text_hero.setBounds(190,200,300,30);
-        text_hero.setOpaque(false); // Make the text field transparent
-        add(text_hero);
+        text_pet = new JTextField();
+        text_pet.setFont(new Font("Rale way",Font.BOLD, 14));
+        text_pet.setBounds(190,200,300,30);
+        text_pet.setOpaque(false); // Make the text field transparent
+        add(text_pet);
 
         JLabel DOB = new JLabel("DOB:");
         DOB.setFont(new Font("Rale way", Font.BOLD, 20));
@@ -181,6 +181,14 @@ public class Signup1 extends JFrame implements ActionListener
         next_button.addActionListener(this);// this line will evoke the actionPerformed method to get the user input
         add(next_button);
 
+        back_button = new JButton("Back");
+        back_button.setFont(new Font("Rale way",Font.BOLD, 14));
+        back_button.setBounds(700,740,90,30);
+        back_button.setOpaque(false);
+        back_button.setContentAreaFilled(false);
+        back_button.addActionListener(this);// this line will evoke the actionPerformed method to get the user input
+        add(back_button);
+
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/signup1_bg.png"));
         Image i2 = i1.getImage().getScaledInstance(850,800,Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
@@ -205,8 +213,18 @@ public class Signup1 extends JFrame implements ActionListener
 
     public void actionPerformed(ActionEvent e) //actionPerformed method from the ActionListener, get called when users hit next button
     {
+        if (e.getSource() == back_button)
+        {
+            new Login();
+            setVisible(false);
+        }
         String name = text_name.getText();
-        String hero_name = text_hero.getText();
+        String pet_name = text_pet.getText();
+        if (name.matches("\\d+") || pet_name.matches("\\d+") || name.matches(".*\\d.*") || pet_name.matches(".*\\d.*"))
+        {
+            JOptionPane.showMessageDialog(null, "Invalid name or pet name. Please don't use number.");
+            return;
+        }
         String date_of_birth = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
         int year = Integer.parseInt(date_of_birth.substring(date_of_birth.lastIndexOf(",") + 2));
         int current_year = Calendar.getInstance().get(Calendar.YEAR);
@@ -243,18 +261,20 @@ public class Signup1 extends JFrame implements ActionListener
         String state = text_state.getText();
 
         try {
-            if (text_name.getText().isEmpty() || text_hero.getText().isEmpty() || text_email.getText().isEmpty() || text_address.getText().isEmpty() || text_city.getText().isEmpty() || text_state.getText().isEmpty() || text_zip.getText().isEmpty())
+            if (text_name.getText().isEmpty() || text_pet.getText().isEmpty() || text_email.getText().isEmpty() || text_address.getText().isEmpty() || text_city.getText().isEmpty() || text_state.getText().isEmpty() || text_zip.getText().isEmpty())
                 JOptionPane.showMessageDialog(null, "Please fill all the fields in the sign up form.");
             else
             {
                 Custom_connection c = new Custom_connection();
                 // Constructing an SQL INSERT query to add a new record to the signup_data_table
                 // with values obtained from form inputs: form_num, name, hero_name, etc.
-                String query = "insert into signup1 values('" + rand_form_num + "','" + name + "','" + hero_name + "','" + date_of_birth + "','" + gender + "','" + email + "','" + marry_status + "', '" + address + "', '" + city + "','" + zipcode + "','" + state + "' )";
+                String query = "insert into signup1 values('" + rand_form_num + "','" + name + "','" + pet_name + "','" + date_of_birth + "','" + gender + "','" + email + "','" + marry_status + "', '" + address + "', '" + city + "','" + zipcode + "','" + state + "' )";
                 c.j_statement.executeUpdate(query); //executing SQL statements that modify the database
                 if (e.getSource() == next_button)
+                {
                     new Signup2(rand_form_num);
-                setVisible(false);
+                    setVisible(false);
+                }
             }
         } catch (Exception E) {
             E.printStackTrace();

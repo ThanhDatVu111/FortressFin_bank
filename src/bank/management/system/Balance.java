@@ -16,10 +16,10 @@ public class Balance extends JFrame implements ActionListener
         super();
         this.PIN = pin;
 
-        balance_msg = new JLabel("YOUR CURRENT BALANCE is $");
+        balance_msg = new JLabel("YOUR CURRENT BALANCE IS $");
         balance_msg.setForeground(Color.BLACK);
         balance_msg.setFont(new Font("System", Font.BOLD, 24));
-        balance_msg.setBounds(100,150,330,35);
+        balance_msg.setBounds(100,150,380,35);
         add(balance_msg);
 
         back_button = new JButton("BACK");
@@ -54,7 +54,7 @@ public class Balance extends JFrame implements ActionListener
         balance_result = new JLabel();
         balance_result.setForeground(Color.BLACK);
         balance_result.setFont(new Font("System", Font.BOLD, 24));
-        balance_result.setBounds(420,150,400,35);
+        balance_result.setBounds(480,150,150,35);
         balance_result.setText(""+balance);
         add(balance_result);
 

@@ -120,6 +120,11 @@ public class Login extends JFrame implements ActionListener //Login class inheri
                 Custom_connection c = new Custom_connection();
                 String card_num = card_field.getText();
                 String pin = pin_field.getText();
+                if (card_num.isEmpty() || pin.isEmpty())
+                {
+                    JOptionPane.showMessageDialog(null,"card number or PIN is empty, please insert your card number and PIN");
+                    return;
+                }
                 ResultSet resultSet = c.j_statement.executeQuery("select * from login where card_number = '"+card_num+"' and pin = '"+pin+"'"); //retrieve data from mysql.
                 if (resultSet.next()) //If resultSet.next() returns true, it means there is at least one matching record (card_num,pin) in the MySQL database.
                 {
@@ -127,7 +132,10 @@ public class Login extends JFrame implements ActionListener //Login class inheri
                     new Main(pin);
                 }
                 else
-                    JOptionPane.showMessageDialog(null,"Incorrect card number or PIN");
+                {
+                    JOptionPane.showMessageDialog(null, "Incorrect card number or PIN");
+                    return;
+                }
             }
             else if(e.getSource() == clear_button)
             {

@@ -107,9 +107,20 @@ public class Transfer extends JFrame implements ActionListener
                 Date date = new Date();
                 String recipient_name = name_field.getText();
                 String card_number = card_field.getText();
-                if (recipient_name.isEmpty() || card_number.isEmpty() || !card_number.matches("\\d+")) // Check if the input is not empty and contains only numbers
+                String amount = transfer_field.getText();
+                if (recipient_name.isEmpty() || card_number.isEmpty() || amount.isEmpty()) // Check if the input is not empty and contains only numbers
                 {
-                    JOptionPane.showMessageDialog(null, "Please enter valid information to transfer");
+                    JOptionPane.showMessageDialog(null, "Please enter valid information.");
+                    return;
+                }
+                else if ( recipient_name.matches(".*\\d.*"))
+                {
+                    JOptionPane.showMessageDialog(null, "Recipient name cannot contain numbers, please try again.");
+                    return;
+                }
+                else if (!card_number.matches("\\d+") || !amount.matches("\\d+"))
+                {
+                    JOptionPane.showMessageDialog(null, "Please enter only numbers for recipient card number and transfer amount.");
                     return;
                 }
                 else
@@ -142,8 +153,7 @@ public class Transfer extends JFrame implements ActionListener
                                     balance -= Integer.parseInt(resultSet2.getString("amount"));
                             }
                             resultSet2.close();
-                            String amount = transfer_field.getText();
-                            if (amount.isEmpty() || !amount.matches("\\d+") || Integer.parseInt(amount) > balance)
+                            if (Integer.parseInt(amount) > balance || Integer.parseInt(amount) < 0)
                                 JOptionPane.showMessageDialog(null, "Sorry, the withdrawal amount is invalid or your account balance is insufficient to complete the transfer. Please try again");
                             else {
                                 //after everything is right, we take out the money and transfer the amount into recipient account

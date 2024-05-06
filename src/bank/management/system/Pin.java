@@ -90,12 +90,12 @@ public class Pin extends JFrame implements ActionListener
                 }
                 if (pin1.length() != 4 && pin2.length() != 4)
                 {
-                    JOptionPane.showMessageDialog(null,"The length of both two pins is 4 both field.");
+                    JOptionPane.showMessageDialog(null,"PLease insert 4 digit pin only.");
                     return;
                 }
                 if (!pin1.matches("\\d+") && !pin2.matches("\\d+"))
                 {
-                    JOptionPane.showMessageDialog(null,"Please enter 4 digit pin for both field.");
+                    JOptionPane.showMessageDialog(null,"Please use number for your new pin.");
                     return;
                 }
                 if (!pin1.equals(pin2))
